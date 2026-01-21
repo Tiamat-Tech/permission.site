@@ -239,7 +239,8 @@ geolocation {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #f0f0f0;
+  background-color: var(--button-background-color);
+  color: currentColor;
   cursor: pointer;
   user-select: none;
 }
@@ -253,7 +254,7 @@ geolocation:hover {
   border: 1px solid #ddd;
   padding: 15px;
   margin-top: 10px;
-  background-color: #fafafa;
+  background-color: var(--button-background-color);
   min-height: 80px;
   white-space: pre-wrap;
 }
