@@ -77,14 +77,19 @@ window.addEventListener("DOMContentLoaded", () => {
       draw();
     } catch (e) {
       console.error("Web Audio API error: ", e);
-      log(`Failed to initialize Web Audio level visualization: ${e.message}`, "error");
+      log(
+        `Failed to initialize Web Audio level visualization: ${e.message}`,
+        "error",
+      );
     }
   }
 
   function clearCurrentStream() {
     stopAudioVisualization();
     if (currentStream) {
-      currentStream.getTracks().forEach((track) => track.stop());
+      currentStream.getTracks().forEach((track) => {
+        track.stop();
+      });
       videoPreview.srcObject = null;
       currentStream = null;
       log("Previous stream tracks stopped and cleared.", "info");
@@ -111,14 +116,12 @@ window.addEventListener("DOMContentLoaded", () => {
             clearCurrentStream();
             currentStream = stream;
             videoPreview.srcObject = currentStream;
-            
             const vTracks = currentStream.getVideoTracks().length;
             const aTracks = currentStream.getAudioTracks().length;
             log(
               `${testName} Success! Stream acquired (Video tracks: ${vTracks}, Audio tracks: ${aTracks})`,
               "success",
             );
-            
             // Start audio level visualizer if microphone is active
             visualizeAudio(currentStream);
           })
@@ -153,16 +156,11 @@ window.addEventListener("DOMContentLoaded", () => {
         clearCurrentStream();
         currentStream = el.stream;
         videoPreview.srcObject = currentStream;
-        
         // Start audio level visualizer if microphone is active
         visualizeAudio(currentStream);
       }
-      const vTracks = currentStream
-        ? currentStream.getVideoTracks().length
-        : 0;
-      const aTracks = currentStream
-        ? currentStream.getAudioTracks().length
-        : 0;
+      const vTracks = currentStream ? currentStream.getVideoTracks().length : 0;
+      const aTracks = currentStream ? currentStream.getAudioTracks().length : 0;
       log(
         `[${sourceName}] ${testName} Success! Stream acquired (Video tracks: ${vTracks}, Audio tracks: ${aTracks})`,
         "success",

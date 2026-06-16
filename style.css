@@ -286,7 +286,11 @@ microphone {
 usermedia:hover,
 camera:hover,
 microphone:hover {
-  background-color: color-mix(in oklab, currentColor 10%, var(--button-background-color));
+  background-color: color-mix(
+    in oklab,
+    currentColor 10%,
+    var(--button-background-color)
+  );
 }
 
 .media-display-container {
@@ -354,5 +358,3 @@ microphone:hover {
   background-color: #1ac222;
   transition: width 0.05s ease;
 }
-
-
