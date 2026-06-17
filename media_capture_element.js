@@ -192,6 +192,61 @@ window.addEventListener("DOMContentLoaded", () => {
     el.addEventListener("cancel", () => handleCancel("Listener:cancel"));
   }
 
+  const OT_TOKEN =
+    "As0h1KZNvjE/ahZ5XIjLEylA1lNDTQ+VFANatlPIrPi5fntBf9nZPUBNeIbHvOupoy1hXWZYE4q4rniDLGWSuAoAAABseyJvcmlnaW4iOiJodHRwczovL3Blcm1pc3Npb24uc2l0ZTo0NDMiLCJmZWF0dXJlIjoiVXNlck1lZGlhRWxlbWVudCIsImV4cGlyeSI6MTc5MDAzNTIwMCwiaXNTdWJkb21haW4iOnRydWV9";
+  const toggleOtBtn = document.getElementById("toggle-ot-btn");
+  const modeIndicator = document.getElementById("mode-indicator");
+
+  function updateModeUI() {
+    const meta = document.querySelector('meta[http-equiv="origin-trial"]');
+    const hasToken = meta && meta.getAttribute("content") === OT_TOKEN;
+
+    if (hasToken) {
+      modeIndicator.textContent = "LEGACY (ORIGIN TRIAL ACTIVE)";
+      toggleOtBtn.textContent = "Disable Legacy Mode (OT)";
+    } else {
+      modeIndicator.textContent = "STANDARD";
+      toggleOtBtn.textContent = "Enable Legacy Mode (OT)";
+    }
+  }
+
+  function initializeOriginTrial() {
+    const isLegacy = sessionStorage.getItem("legacyModeActive") === "true";
+    let meta = document.querySelector('meta[http-equiv="origin-trial"]');
+
+    if (isLegacy) {
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("http-equiv", "origin-trial");
+        meta.setAttribute("content", OT_TOKEN);
+        document.head.appendChild(meta);
+      }
+    } else {
+      if (meta && meta.getAttribute("content") === OT_TOKEN) {
+        meta.remove();
+      }
+    }
+    updateModeUI();
+  }
+
+  function toggleOriginTrial() {
+    const isLegacy = sessionStorage.getItem("legacyModeActive") === "true";
+    if (isLegacy) {
+      sessionStorage.setItem("legacyModeActive", "false");
+    } else {
+      sessionStorage.setItem("legacyModeActive", "true");
+    }
+    // Reload is required for Chrome to re-evaluate the Origin Trial state and register the custom HTML elements.
+    window.location.reload();
+  }
+
+  if (toggleOtBtn) {
+    toggleOtBtn.addEventListener("click", toggleOriginTrial);
+  }
+
+  // Initialize on load based on stored session state
+  initializeOriginTrial();
+
   logOutput.innerHTML = "";
   log("System ready. Click elements above to test.", "info");
 

@@ -358,3 +358,26 @@ microphone:hover {
   background-color: #1ac222;
   transition: width 0.05s ease;
 }
+
+.mode-toggle-box {
+  margin: 1.5em auto 2.5em;
+  padding: 1em;
+  border: 1px dashed #aaa;
+  max-width: 640px;
+  border-radius: 5px;
+  background-color: var(--button-background-color);
+  text-align: center;
+}
+
+.mode-toggle-box p {
+  margin: 0 0 1em;
+  font-size: 1.1em;
+}
+
+.mode-toggle-box button {
+  width: auto;
+  font-size: 1em;
+  padding: 6px 12px;
+  margin: 0;
+}
+
