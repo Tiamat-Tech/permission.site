@@ -210,25 +210,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function initializeOriginTrial() {
-    const isLegacy = sessionStorage.getItem("legacyModeActive") === "true";
-    let meta = document.querySelector('meta[http-equiv="origin-trial"]');
-
-    if (isLegacy) {
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.setAttribute("http-equiv", "origin-trial");
-        meta.setAttribute("content", OT_TOKEN);
-        document.head.appendChild(meta);
-      }
-    } else {
-      if (meta && meta.getAttribute("content") === OT_TOKEN) {
-        meta.remove();
-      }
-    }
-    updateModeUI();
-  }
-
   function toggleOriginTrial() {
     const isLegacy = sessionStorage.getItem("legacyModeActive") === "true";
     if (isLegacy) {
@@ -245,7 +226,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // Initialize on load based on stored session state
-  initializeOriginTrial();
+  updateModeUI();
 
   logOutput.innerHTML = "";
   log("System ready. Click elements above to test.", "info");

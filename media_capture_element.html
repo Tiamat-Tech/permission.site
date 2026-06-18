@@ -7,6 +7,19 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="app-icon.png" />
     <link rel="stylesheet" href="style.css" />
+    <script>
+      (function() {
+        const OT_TOKEN =
+          "As0h1KZNvjE/ahZ5XIjLEylA1lNDTQ+VFANatlPIrPi5fntBf9nZPUBNeIbHvOupoy1hXWZYE4q4rniDLGWSuAoAAABseyJvcmlnaW4iOiJodHRwczovL3Blcm1pc3Npb24uc2l0ZTo0NDMiLCJmZWF0dXJlIjoiVXNlck1lZGlhRWxlbWVudCIsImV4cGlyeSI6MTc5MDAzNTIwMCwiaXNTdWJkb21haW4iOnRydWV9";
+        const isLegacy = sessionStorage.getItem("legacyModeActive") === "true";
+        if (isLegacy) {
+          const meta = document.createElement("meta");
+          meta.setAttribute("http-equiv", "origin-trial");
+          meta.setAttribute("content", OT_TOKEN);
+          document.head.appendChild(meta);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div class="before"></div>
@@ -54,7 +67,7 @@
         <video id="video-feed" class="media-video-feed" autoplay muted playsinline></video>
         
         <div id="volume-meter-container" class="volume-meter-container">
-          <label for="volume-meter-bar">🎤 Microphone Input Level:</label>
+          <span>Microphone Input Level:</span>
           <div class="volume-meter-bg">
             <div id="volume-meter-bar" class="volume-meter-bar"></div>
           </div>
