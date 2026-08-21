@@ -9,47 +9,10 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="app-icon.png" />
     <link rel="stylesheet" href="style.css" />
-    <style>
-      /* Maximum contrast between page background and foreground: pure black on
-         pure white in light mode, pure white on pure black in dark mode. Both
-         are a 21:1 contrast ratio, the highest sRGB allows. */
-      :root {
-        --main-background-color: #fff;
-        --button-background-color: #fff;
-        --main-foreground-color: #000;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --main-background-color: #000;
-          --button-background-color: #000;
-          --main-foreground-color: #fff;
-        }
-      }
-
-      body {
-        color: var(--main-foreground-color);
-      }
-
-      geolocation,
-      .geolocation-event-logger,
-      .instructions,
-      pre,
-      code {
-        background-color: var(--main-background-color);
-        color: var(--main-foreground-color);
-        border-color: currentColor;
-      }
-
-      /* Invert on hover, which keeps the same 21:1 ratio. */
-      geolocation:hover {
-        background-color: var(--main-foreground-color);
-        color: var(--main-background-color);
-      }
-    </style>
   </head>
   <body>
-    <div class="container">
+    <div class="before"></div>
+    <div class="content">
       <h1>Geolocation Element Demo</h1>
       <h2>1. Manual Location Request</h2>
       <p>Click the element below to request the current location.</p>
@@ -78,15 +41,15 @@
         Geolocation watch element is not supported
       </geolocation>
       <div id="watch-output" class="geolocation-event-logger">Waiting for location updates...</div>
-      
-      <div class="instructions">
-        <h3>Demo Instructions</h3>
+
+      <div class="demo-instructions">
+        <h2>Demo instructions</h2>
         <p>In Chrome M143 or later, go to <code>chrome://flags#geolocation-element</code> and enable the experiment.</p>
         <p>Alternatively, follow these instructions to enable experimental support:</p>
         <ul>
           <li>Shut down the browser process.</li>
           <li>
-            Restart the browser with these command line flag:
+            Restart the browser with this command line flag:
             <pre>--enable-features=PermissionElement,GeolocationElement</pre>
           </li>
           <li>
@@ -96,6 +59,7 @@
         </ul>
       </div>
     </div>
+    <div class="after"></div>
     <div class="github-fork-ribbon-wrapper right">
       <div class="github-fork-ribbon">
         <a href="https://github.com/chromium/permission.site">On GitHub</a>

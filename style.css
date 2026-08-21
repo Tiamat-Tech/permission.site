@@ -1,14 +1,11 @@
 :root {
   color-scheme: light dark;
-  --main-background-color: #eee;
-  --button-background-color: #fff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --main-background-color: #222;
-    --button-background-color: #555;
-  }
+  --main-background-color: light-dark(#eee, #222);
+  --button-background-color: light-dark(#fff, #555);
+  /* Kept separate from the button colors so the hover state can stay legible
+     against `currentColor` text in both schemes. */
+  --geolocation-background-color: light-dark(#fff, #555);
+  --geolocation-hover-background-color: light-dark(#e0e0e0, #6b6b6b);
 }
 
 /* Light material design boilerplate. */
@@ -247,14 +244,14 @@ geolocation {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: var(--button-background-color);
+  background-color: var(--geolocation-background-color);
   color: currentColor;
   cursor: pointer;
   user-select: none;
 }
 
 geolocation:hover {
-  background-color: #e0e0e0;
+  background-color: var(--geolocation-hover-background-color);
 }
 
 .geolocation-event-logger {
